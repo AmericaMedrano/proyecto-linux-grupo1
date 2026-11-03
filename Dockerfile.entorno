@@ -1,0 +1,8 @@
+FROM ubuntu:24.04
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    sudo cron git curl iputils-ping ca-certificates procps util-linux \
+    docker.io && rm -rf /var/lib/apt/lists/*
+COPY scripts/entrada_entorno.sh /usr/local/bin/entrada_entorno.sh
+RUN chmod +x /usr/local/bin/entrada_entorno.sh
+ENTRYPOINT ["/usr/local/bin/entrada_entorno.sh"]
